@@ -70,7 +70,7 @@ module.exports = {
       options: {
         analyzerMode: 'static',
         production: true,
-        reportFilename: '__analyzer.html',
+        reportFilename: 'analyzer.html',
         openAnalyzer: false
       }
     }
