@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'inori_lover的地头',
+    title: '乐园遗梦',
     author: 'inori_lover',
     description: '碎碎念为主',
     siteUrl: 'http://blog.inori.icu',
@@ -70,7 +70,8 @@ module.exports = {
       options: {
         analyzerMode: 'static',
         production: true,
-        reportFilename: '__analyzer.html'
+        reportFilename: '__analyzer.html',
+        openAnalyzer: false
       }
     }
   ],

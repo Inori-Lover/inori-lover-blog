@@ -1,21 +1,12 @@
 ---
 title: Hello World
-date: "2015-05-01T22:12:03.284Z"
+
+[]: # (new Date()).toJSON()
+date: "2018-11-25T15:58:43.629Z"
 ---
 
-This is my first post on my new fake blog! How exciting!
+搞了好久终于把gatsby搞定了！个人的第一个博客应该算是正式开始了。
 
-I'm sure I'll write a lot more interesting things in the future.
+估计也没啥人看得到就是了 -_-
 
-Oh, and here's a great quote from this Wikipedia on
-[salted duck eggs](http://en.wikipedia.org/wiki/Salted_duck_egg).
-
-> A salted duck egg is a Chinese preserved food product made by soaking duck
-> eggs in brine, or packing each egg in damp, salted charcoal. In Asian
-> supermarkets, these eggs are sometimes sold covered in a thick layer of salted
-> charcoal paste. The eggs may also be sold with the salted paste removed,
-> wrapped in plastic, and vacuum packed. From the salt curing process, the
-> salted duck eggs have a briny aroma, a gelatin-like egg white and a
-> firm-textured, round yolk that is bright orange-red in color.
-
-![Chinese Salty Egg](./salty_egg.jpg)
+2018年11月26日 00点05分
