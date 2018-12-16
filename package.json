@@ -59,7 +59,7 @@
     "develop": "gatsby develop",
     "start": "npm run develop",
     "build": "gatsby build",
-    "deploy": "rm -rf .cache && gatsby build --prefix-paths && gh-pages -d public",
+    "deploy": "rm -rf .cache && gatsby build --prefix-paths && gh-pages -d public -r https://github.com/Inori-Lover/inori-lover-blog.git",
     "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix gatsby-node.js"
   }
 }
