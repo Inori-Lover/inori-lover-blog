@@ -1,1 +1,1 @@
-### [https://blog.inori.icu/](Blog)
+### [Blog](https://blog.inori.icu/)
