@@ -1,5 +1,12 @@
 {
   "trailingComma": "es5",
   "semi": false,
-  "singleQuote": true
+  "parser": "babel",
+  "singleQuote": true,
+  "overrides":[{
+    "files":["*.md"],
+    "options": {
+      "parser": "mdx"
+    }
+  }]
 }
