@@ -13,7 +13,7 @@
   base<span class="token punctuation">.</span>value <span class="token operator">-=</span> <span class="token number">1</span>
 <span class="token punctuation">}</span>
 <span class="token keyword">const</span> next <span class="token operator">=</span> <span class="token function">produce</span><span class="token punctuation">(</span>base<span class="token punctuation">,</span> mutable<span class="token punctuation">)</span></code></pre></div>
-<p>immer 通过<code class="language-text">Proxy</code>(或在降级环境使用<code class="language-text">Object.defineProperty</code>)拦截掉对<code class="language-text">draft</code>的每一个修改并记录下这次修改产生的 diff（immer 称之为 patch，以下用 patch 代指）；在执行完 mutable 后，immer 再根据 patch 信息在 base 的基础上进行新对象的建立。这完整走下来的流程也被称为<code class="language-text">copy-on-write</code>(COW，写时复制)，一种比较常见的优化策略。</p>
+<p>immer 通过<code class="language-text">Proxy</code>(或在降级环境使用<code class="language-text">Object.defineProperty</code>)拦截掉对<code class="language-text">draft</code>的每一个修改并记录下这次修改产生的 diff（immer 称之为 patch，以下用 patch 代指）；在执行完 mutable 后，immer 再根据 patch 信息在 base 的基础上进行新对象的建立。这完整走下来的流程也被称为<code class="language-text">copy-on-write</code>(COW，写时复制)，是一种比较常见的优化策略。</p>
 <p>注意在举例代码中的 mutable 函数中，一共发生了两次修改操作，每次修改会产生一个 patch，整个 mutable 函数走完会产生两个 patch 信息（长度为 2 的 patch 信息数组）。</p>
 <h3>获取</h3>
 <p>我们对上边的示例代码做一点修改。</p>
