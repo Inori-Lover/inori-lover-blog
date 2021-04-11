@@ -2,8 +2,9 @@ module.exports = {
   siteMetadata: {
     title: '乐园遗梦',
     author: 'inori_lover',
-    description: '碎碎念为主',
-    siteUrl: 'http://blog.inori.icu',
+    description:
+      '这里是一名二刺螈的自留地，主要写？想到什么写什么，影评、感想、代码。。。',
+    siteUrl: 'https://blog.inori.website/',
   },
   pathPrefix: '/',
   plugins: [
@@ -38,18 +39,12 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        //trackingId: `ADD YOUR TRACKING ID HERE`,
-      },
-    },
     `gatsby-plugin-feed`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `乐园遗梦`,
+        short_name: `乐园遗梦`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
@@ -71,8 +66,8 @@ module.exports = {
         analyzerMode: 'static',
         production: true,
         reportFilename: 'analyzer.html',
-        openAnalyzer: false
-      }
-    }
+        openAnalyzer: false,
+      },
+    },
   ],
 }
