@@ -1,7 +1,7 @@
 {
   "trailingComma": "es5",
   "semi": false,
-  "parser": "babel",
+  "parser": "typescript",
   "singleQuote": true,
   "overrides":[{
     "files":["*.md"],
