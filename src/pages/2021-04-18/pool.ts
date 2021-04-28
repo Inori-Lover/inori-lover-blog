@@ -42,51 +42,70 @@ class Pool {
   /** 分批压入任务 */
   public map = <T = unknown, Source = unknown>(
     sources: Source[],
-    taskConStructor: (param: Source) => Promise<T>,
-    config?: { continueOnError?: boolean }
+    taskConstructor: (
+      param: Source,
+      index: number,
+      sources: Source[]
+    ) => Promise<T>
   ): Promise<T[]> => {
-    const continueOnError = config?.continueOnError || false
+    /** 存放结果 */
     const result: T[] = []
+    /** 指针，当前运行第几项 */
     let cursor = 0
+    /** 指针最大值，缓存下来加快运行速度 */
     const maxCursor = sources.length - 1
-    // 空余的pool位置
-    let mapPoolDepth = Math.max(this.bufferLen - this.poolDepth, 1)
+    /** 是否已经发生过错误 */
+    let hasError = false
+    /** 本次map里尚在运行的任务；因为是共用了pool所以这里需要单独计数而不能直接读pool深度 */
+    let currentTasksNum = 0
+
+    /** 压入任务 */
     const add = (
       resolve: (result: T[]) => void,
       reject: (reason: unknown) => void
     ): void => {
       const currentCursor = cursor
       cursor += 1
+      currentTasksNum += 1
 
-      this.add(() => taskConStructor(sources[currentCursor])).then(
+      /** 执行任务 */
+      this.add(() =>
+        taskConstructor(sources[currentCursor], currentCursor, sources)
+      ).then(
         (res) => {
+          // 如果有错误，那就什么都不用干了，跟同步的map函数行为一致
+          if (hasError) {
+            return
+          }
+
+          /** 正在运行的任务数减一 */
+          currentTasksNum -= 1
+
+          /** 保存结果 */
           result[currentCursor] = res
-          if (currentCursor === maxCursor) {
+          /** 当指针已经越过最大值且没有任务在跑，代表所有任务都跑完了 */
+          if (cursor > maxCursor && !currentTasksNum) {
+            /** 可以触发Promise的返回 */
             resolve(result)
           } else {
+            /** 否则继续跑任务 */
             add(resolve, reject)
           }
         },
         (err) => {
-          if (continueOnError) {
-            if (currentCursor === maxCursor) {
-              resolve(result)
-            } else {
-              add(resolve, reject)
-            }
-          } else {
-            reject(err)
-          }
+          hasError = true
+          reject(err)
         }
       )
+
+      /** 因为是共用pool，所以有可能压入的时候有很多任务，但是过了一会别的任务全部完成了，有空位 */
+      if (this.bufferLen > this.poolDepth) {
+        /** 同步迭代，因为pool是出于避免大数组出现而做的数量限制，所以这里不考虑迭代深度爆栈的问题 */
+        add(resolve, reject)
+      }
     }
 
-    return new Promise<T[]>((r, j) => {
-      while (mapPoolDepth > 0) {
-        add(r, j)
-        mapPoolDepth -= 1
-      }
-    })
+    return new Promise<T[]>(add)
   }
 
   /** 获取当前等待队列长度 */
