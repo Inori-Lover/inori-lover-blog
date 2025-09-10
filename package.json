@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "core-js": "^3.10.1",
-    "gatsby": "^3.2.1",
+    "gatsby": "^5.15.0",
     "gatsby-plugin-feed": "^3.2.0",
     "gatsby-plugin-manifest": "^3.2.0",
     "gatsby-plugin-offline": "^4.2.0",
